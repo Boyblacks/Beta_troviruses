@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TROVIRUSES</title>
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/worlds.css">
+    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/flashcards.css">
+</head>
+<div
+    id="factory-reset-overlay"
+    class="factory-reset-overlay"
+    hidden
+    aria-hidden="true"
+>
+    <div
+        class="factory-reset-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="factory-reset-title"
+    >
+
+        <h2 id="factory-reset-title">
+            Reset TROVIRUSES?
+        </h2>
+
+        <p>
+            This will permanently delete all your saved
+            progress and application data.
+        </p>
+
+        <p>
+            You will start again as if you have never used
+            TROVIRUSES before.
+        </p>
+
+        <div class="settings-actions">
+
+            <button
+                type="button"
+                id="factory-reset-cancel"
+                class="settings-button secondary"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                id="factory-reset-confirm"
+                class="settings-button danger"
+            >
+                Reset Everything
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<body>
+
+    <!-- Global Application -->
+    <div id="app">
+
+        <!-- Global Background -->
+        <div id="app-background" aria-hidden="true"></div>
+
+        <!-- Main Application Content -->
+        <main id="app-content">
+
+            <!-- Sections will be mounted here -->
+           <section
+    id="settings-section"
+    class="app-section"
+    data-section="settings"
+    hidden
+>
+    <div class="settings-page">
+
+<header class="settings-header">
+            <h1>Settings</h1>
+            <p>Manage your TROVIRUSES application.</p>
+        </header>
+
+<!-- World Settings -->
+
+        <section class="settings-group">
+
+            <div class="settings-group-header">
+                <h2>World Settings</h2>
+
+                <p>
+                    Configure each world independently.
+                </p>
+            </div>
+
+
+            <div class="settings-card">
+
+                <div class="settings-card-info">
+
+                    <h3>World</h3>
+
+                    <p>
+                        Select the world you want to configure.
+                    </p>
+
+                </div>
+
+
+                <select
+                    id="world-difficulty-world"
+                    class="settings-button"
+                >
+
+                    <option value="world1">
+                        Eng
+                    </option>
+
+                    <option value="world2">
+                        Cyber
+                    </option>
+
+                    <option value="world3">
+                        Spanish
+                    </option>
+
+                    <option value="world4">
+                        Hack Urself
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Difficulty -->
+
+
+            <div class="settings-card">
+
+                <div class="settings-card-info">
+
+                    <h3>Difficulty</h3>
+
+                    <p>
+                        Controls how difficult the rivals are.
+                    </p>
+
+                </div>
+
+
+                <div class="radio-input">
+
+                    <label class="label">
+
+                        <input
+                            type="radio"
+                            name="world-difficulty"
+                            value="easy"
+                        >
+
+                        <p class="text">
+                            Easy
+                        </p>
+
+                    </label>
+
+
+                    <label class="label">
+
+                        <input
+                            type="radio"
+                            name="world-difficulty"
+                            value="normal"
+                        >
+
+                        <p class="text">
+                            Normal
+                        </p>
+
+                    </label>
+
+
+                    <label class="label">
+
+                        <input
+                            type="radio"
+                            name="world-difficulty"
+                            value="hard"
+                        >
+
+                        <p class="text">
+                            Hard
+                        </p>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- Rival Count -->
+
+            <div class="settings-card">
+
+                <div class="settings-card-info">
+
+                    <h3>Rival Count</h3>
+
+                    <p>
+                        Controls how many rivals appear.
+                    </p>
+
+                </div>
+
+
+                <div class="radio-input">
+
+                    <label class="label">
+
+                        <input
+                            type="radio"
+                            name="rival-count"
+                            value="low"
+                        >
+
+                        <p class="text">
+                            Low
+                        </p>
+
+                    </label>
+
+
+                    <label class="label">
+
+                        <input
+                            type="radio"
+                            name="rival-count"
+                            value="normal"
+                        >
+
+                        <p class="text">
+                            Normal
+                        </p>
+
+                    </label>
+
+
+                    <label class="label">
+
+                        <input
+                            type="radio"
+                            name="rival-count"
+                            value="high"
+                        >
+
+                        <p class="text">
+                            High
+                        </p>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- Challenge Frequency -->
+
+            <div class="settings-card">
+
+                <div class="settings-card-info">
+
+                    <h3>Challenge Frequency</h3>
+
+                    <p>
+                        Controls how often challenges appear.
+                    </p>
+
+                </div>
+
+
+                <div class="radio-input">
+
+                    <label class="label">
+
+                        <input
+                            type="radio"
+                            name="challenge-frequency"
+                            value="rare"
+                        >
+
+                        <p class="text">
+                            Rare
+                        </p>
+
+                    </label>
+
+
+                    <label class="label">
+
+                        <input
+                            type="radio"
+                            name="challenge-frequency"
+                            value="normal"
+                        >
+
+                        <p class="text">
+                            Normal
+                        </p>
+
+                    </label>
+
+
+                    <label class="label">
+
+                        <input
+                            type="radio"
+                            name="challenge-frequency"
+                            value="frequent"
+                        >
+
+                        <p class="text">
+                            Frequent
+                        </p>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </section>
+
+<!-- Data -->
+
+        <section class="settings-group">
+
+            <div class="settings-group-header">
+                <h2>Data</h2>
+                <p>Manage your application data and backups.</p>
+            </div>
+
+            <div class="settings-card">
+
+                <div class="settings-card-info">
+                    <h3>Backup</h3>
+
+                    <p>
+                        Export or restore your TROVIRUSES data.
+                    </p>
+                </div>
+
+                <div class="settings-actions">
+
+                    <button
+                        type="button"
+                        id="backup-export-button"
+                        class="settings-button"
+                    >
+                        Export Backup
+                    </button>
+
+                    <button
+                        type="button"
+                        id="backup-import-button"
+                        class="settings-button secondary"
+                    >
+                        Import Backup
+                    </button>
+
+                    <input
+                        type="file"
+                        id="backup-import-input"
+                        accept="application/json,.json"
+                        hidden
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+<section class="settings-group danger-zone">
+
+    <div class="settings-group-header">
+        <h2>Danger Zone</h2>
+
+        <p>
+            Irreversible actions that affect your TROVIRUSES data.
+        </p>
+    </div>
+
+    <div class="settings-card danger-card">
+
+        <div class="settings-card-info">
+            <h3>Factory Reset</h3>
+
+            <p>
+                Delete all saved progress, worlds, flashcards,
+                settings, and application data.
+                This cannot be undone.
+            </p>
+        </div>
+
+        <div class="settings-actions">
+
+            <button
+                type="button"
+                id="factory-reset-button"
+                class="settings-button danger"
+            >
+                Factory Reset
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+    </div>
+</section>
+            <section
+                id="worlds-section"
+                class="app-section"
+                data-section="worlds"
+                hidden
+            >
+               <div 
+                 id="worlds-container"
+                 
+                class="worlds-container" 
+               ></div>
+               
+               <div
+    id="flashcards-container"
+    class="flashcards-container"
+    hidden
+></div>
+               
+                <div
+                
+    id="world-details-container"
+    class="world-details-container"
+              hidden
+></div>
+
+<div
+    id="challenge-container"
+    class="challenge-container"
+    hidden
+></div>
+
+</section>
+
+            <section
+                id="others-section"
+                class="app-section"
+                data-section="others"
+                hidden
+            >
+                <div class="section-placeholder">
+                    <h1>Others</h1>
+                </div>
+            </section>
+
+            <section
+                id="sidebar-section"
+                class="app-section"
+                data-section="sidebar"
+                hidden
+            >
+                <div class="section-placeholder">
+                    <h1>Side Bar</h1>
+                </div>
+            </section>
+
+            
+
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav
+            id="bottom-navigation"
+            class="bottom-navigation"
+            aria-label="Main navigation"
+        >
+
+            <button
+                class="nav-item"
+                type="button"
+                data-section="worlds"
+            >
+                <span>Worlds</span>
+            </button>
+
+            <button
+                class="nav-item"
+                type="button"
+                data-section="others"
+            >
+                <span>Others</span>
+            </button>
+
+            <button
+                class="nav-item active"
+                type="button"
+                data-section="home"
+            >
+                <span>Home</span>
+            </button>
+
+            <button
+                class="nav-item"
+                type="button"
+                data-section="sidebar"
+            >
+                <span>Side Bar</span>
+            </button>
+
+            <button
+                class="nav-item"
+                type="button"
+                data-section="settings"
+            >
+                <span>Settings</span>
+            </button>
+
+        </nav>
+
+        <!-- Daily Mood Overlay -->
+        <div
+            id="mood-overlay"
+            class="mood-overlay"
+            hidden
+            aria-hidden="true"
+        >
+
+            <div
+                class="mood-dialog"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="mood-title"
+            >
+
+                <h2 id="mood-title">
+                    How do you feel today?
+                </h2>
+
+                <p>
+                    Choose a number from 1 to 5.
+                </p>
+
+                <div class="mood-picker">
+
+                    <button
+                        type="button"
+                        class="mood-button"
+                        data-mood="1"
+                    >
+                        1
+                    </button>
+
+                    <button
+                        type="button"
+                        class="mood-button"
+                        data-mood="2"
+                    >
+                        2
+                    </button>
+
+                    <button
+                        type="button"
+                        class="mood-button"
+                        data-mood="3"
+                    >
+                        3
+                    </button>
+
+                    <button
+                        type="button"
+                        class="mood-button"
+                        data-mood="4"
+                    >
+                        4
+                    </button>
+
+                    <button
+                        type="button"
+                        class="mood-button"
+                        data-mood="5"
+                    >
+                        5
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Core -->
+  <script src="js/core/events.js"></script>
+<script src="js/core/storage.js"></script>
+<script src="js/core/state.js"></script>
+<script src="js/core/league-config.js"></script>
+<script src="js/core/league.js"></script>
+<script src="js/core/ranking.js"></script>
+<script src="js/core/rival-generator.js"></script>
+
+<script src="js/core/factory-reset.js"></script>
+
+<script src="js/features/backup/backup.js"></script>
+<script src="js/core/router.js"></script>
+
+<script src="js/features/mood/mood.js"></script>
+<script src="js/features/settings/settings.js"></script>
+<script src="js/features/worlds/world-data.js"></script>
+<script src="js/features/worlds/world-engine.js"></script>
+<script src="js/core/xp.js"></script>
+<script src="js/core/cup.js"></script>
+<script src="js/core/activity.js"></script>
+<script src="js/core/challenge.js"></script>
+<script src="js/features/challenge/challenge-ui.js"></script>
+<script src="js/features/flashcards/flashcard-engine.js"></script>
+<script src="js/features/flashcards/flashcard-study.js"></script>
+<script src="js/features/flashcards/flashcard-ui.js"></script>
+<script src="js/features/worlds/worlds-ui.js"></script>
+
+<script src="js/features/worlds/world-details.js"></script>
+
+<script src="js/core/app.js"></script>
+</body>
+</html>
