@@ -1,0 +1,474 @@
+// TROVIRUSES
+// Settings Feature
+
+(function () {
+    "use strict";
+
+    const DEFAULT_SETTINGS = {
+        worldDifficulty: {
+            world1: "normal",
+            world2: "normal",
+            world3: "normal",
+            world4: "normal"
+        },
+
+        rivalCount: {
+            world1: "normal",
+            world2: "normal",
+            world3: "normal",
+            world4: "normal"
+        },
+
+        challengeFrequency: {
+            world1: "normal",
+            world2: "normal",
+            world3: "normal",
+            world4: "normal"
+        }
+    };
+
+    let settings = {
+        ...DEFAULT_SETTINGS,
+
+        worldDifficulty: {
+            ...DEFAULT_SETTINGS.worldDifficulty
+        },
+
+        rivalCount: {
+            ...DEFAULT_SETTINGS.rivalCount
+        },
+
+        challengeFrequency: {
+            ...DEFAULT_SETTINGS.challengeFrequency
+        }
+    };
+
+    function createBackup() {
+        if (
+            !window.TROVIRUSES ||
+            !window.TROVIRUSES.backup
+        ) {
+            console.error(
+                "TROVIRUSES: Backup Engine is not available."
+            );
+
+            return null;
+        }
+
+        return window.TROVIRUSES.backup.createBackup();
+    }
+
+    function exportBackup() {
+        if (
+            !window.TROVIRUSES ||
+            !window.TROVIRUSES.backup
+        ) {
+            console.error(
+                "TROVIRUSES: Backup Engine is not available."
+            );
+
+            return false;
+        }
+
+        return window.TROVIRUSES.backup.exportBackup();
+    }
+
+    function get(
+        key,
+        worldId = null
+    ) {
+        if (
+            worldId &&
+            (
+                key === "worldDifficulty" ||
+                key === "rivalCount" ||
+                key === "challengeFrequency"
+            )
+        ) {
+            return (
+                settings[key][worldId] ||
+                "normal"
+            );
+        }
+
+        return settings[key];
+    }
+
+    function set(
+        key,
+        value,
+        worldId = null
+    ) {
+        if (!worldId) {
+            return false;
+        }
+
+        const allowedValues = {
+            worldDifficulty: [
+                "easy",
+                "normal",
+                "hard"
+            ],
+
+            rivalCount: [
+                "low",
+                "normal",
+                "high"
+            ],
+
+            challengeFrequency: [
+                "rare",
+                "normal",
+                "frequent"
+            ]
+        };
+
+        if (
+            !allowedValues[key] ||
+            !allowedValues[key].includes(value)
+        ) {
+            return false;
+        }
+
+        settings[key][worldId] = value;
+
+        return true;
+    }
+
+    function getAll() {
+        return {
+            worldDifficulty: {
+                ...settings.worldDifficulty
+            },
+
+            rivalCount: {
+                ...settings.rivalCount
+            },
+
+            challengeFrequency: {
+                ...settings.challengeFrequency
+            }
+        };
+    }
+
+    function reset() {
+        settings = {
+            worldDifficulty: {
+                ...DEFAULT_SETTINGS.worldDifficulty
+            },
+
+            rivalCount: {
+                ...DEFAULT_SETTINGS.rivalCount
+            },
+
+            challengeFrequency: {
+                ...DEFAULT_SETTINGS.challengeFrequency
+            }
+        };
+
+        return true;
+    }
+
+    function initWorldSettingsUI() {
+
+        const worldSelector =
+            document.getElementById(
+                "world-difficulty-world"
+            );
+
+        const difficultyOptions =
+            document.querySelectorAll(
+                'input[name="world-difficulty"]'
+            );
+
+        const rivalCountOptions =
+            document.querySelectorAll(
+                'input[name="rival-count"]'
+            );
+
+        const challengeOptions =
+            document.querySelectorAll(
+                'input[name="challenge-frequency"]'
+            );
+
+        if (!worldSelector) {
+            return;
+        }
+
+        function updateUI() {
+
+            const worldId =
+                worldSelector.value;
+
+            const difficulty =
+                get(
+                    "worldDifficulty",
+                    worldId
+                );
+
+            const rivalCount =
+                get(
+                    "rivalCount",
+                    worldId
+                );
+
+            const challengeFrequency =
+                get(
+                    "challengeFrequency",
+                    worldId
+                );
+
+            difficultyOptions.forEach(
+                (option) => {
+                    option.checked =
+                        option.value ===
+                        difficulty;
+                }
+            );
+
+            rivalCountOptions.forEach(
+                (option) => {
+                    option.checked =
+                        option.value ===
+                        rivalCount;
+                }
+            );
+
+            challengeOptions.forEach(
+                (option) => {
+                    option.checked =
+                        option.value ===
+                        challengeFrequency;
+                }
+            );
+        }
+
+        worldSelector.addEventListener(
+            "change",
+            updateUI
+        );
+
+        difficultyOptions.forEach(
+            (option) => {
+
+                option.addEventListener(
+                    "change",
+                    () => {
+
+                        if (
+                            !option.checked
+                        ) {
+                            return;
+                        }
+
+                        set(
+                            "worldDifficulty",
+                            option.value,
+                            worldSelector.value
+                        );
+                    }
+                );
+
+            }
+        );
+
+        rivalCountOptions.forEach(
+            (option) => {
+
+                option.addEventListener(
+                    "change",
+                    () => {
+
+                        if (
+                            !option.checked
+                        ) {
+                            return;
+                        }
+
+                        set(
+                            "rivalCount",
+                            option.value,
+                            worldSelector.value
+                        );
+                    }
+                );
+
+            }
+        );
+
+        challengeOptions.forEach(
+            (option) => {
+
+                option.addEventListener(
+                    "change",
+                    () => {
+
+                        if (
+                            !option.checked
+                        ) {
+                            return;
+                        }
+
+                        set(
+                            "challengeFrequency",
+                            option.value,
+                            worldSelector.value
+                        );
+                    }
+                );
+
+            }
+        );
+
+        updateUI();
+    }
+
+function initFactoryResetUI() {
+
+    const resetButton =
+        document.getElementById(
+            "factory-reset-button"
+        );
+
+    const overlay =
+        document.getElementById(
+            "factory-reset-overlay"
+        );
+
+    const cancelButton =
+        document.getElementById(
+            "factory-reset-cancel"
+        );
+
+    const confirmButton =
+        document.getElementById(
+            "factory-reset-confirm"
+        );
+
+    if (
+        !resetButton ||
+        !overlay ||
+        !cancelButton ||
+        !confirmButton
+    ) {
+        console.warn(
+            "TROVIRUSES: Factory Reset UI elements not found."
+        );
+
+        return;
+    }
+
+    function openDialog() {
+
+        overlay.hidden = false;
+
+        overlay.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+    }
+
+    function closeDialog() {
+
+        overlay.hidden = true;
+
+        overlay.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+    }
+
+    resetButton.addEventListener(
+        "click",
+        openDialog
+    );
+
+    cancelButton.addEventListener(
+        "click",
+        closeDialog
+    );
+
+    overlay.addEventListener(
+        "click",
+        (event) => {
+
+            if (
+                event.target === overlay
+            ) {
+                closeDialog();
+            }
+
+        }
+    );
+
+    confirmButton.addEventListener(
+        "click",
+        () => {
+
+            if (
+                !window.TROVIRUSES ||
+                !window.TROVIRUSES.factoryReset ||
+                typeof window.TROVIRUSES.factoryReset.reset !==
+                    "function"
+            ) {
+                console.error(
+                    "TROVIRUSES: Factory Reset Engine is not available."
+                );
+
+                return;
+            }
+
+            const success =
+                window.TROVIRUSES.factoryReset.reset();
+
+            if (!success) {
+                console.error(
+                    "TROVIRUSES: Factory Reset failed."
+                );
+
+                return;
+            }
+
+            window.location.reload();
+
+        }
+    );
+}
+
+    function init() {
+
+    initWorldSettingsUI();
+
+    initFactoryResetUI();
+
+    console.log(
+        "TROVIRUSES Settings initialized."
+    );
+}
+
+    window.TROVIRUSES =
+        window.TROVIRUSES || {};
+
+   window.TROVIRUSES.settings = {
+
+    init,
+
+    createBackup,
+
+    exportBackup,
+
+    get,
+
+    set,
+
+    getAll,
+
+    reset,
+
+    initWorldSettingsUI,
+
+    initFactoryResetUI
+
+};
+
+})();
